@@ -39,11 +39,17 @@ class PersonAdmin(admin.ModelAdmin):
     then pass it as the second argument to admin.site.register() – any
     time you need to change the admin options for a model.
     """
-    list_display = ('name_first', 
-                    'name_last', 
+    list_display = ('name_first',
+                    'name_last',
                     'name_full_formatted',
+                    'person_id',
+                    'person_type_cd',
                     'is_active',
-                    'person_id')
+                    'active_status_cd',
+                    'active_status_dttm',
+                    'created_dttm',
+                    )
+    list_filter = ['name_last', 'name_first']
     search_fields = ['name_full_formatted']
 
 

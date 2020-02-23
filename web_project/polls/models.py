@@ -40,6 +40,12 @@ class Person(models.Model):
     name_last = models.CharField("Last Name", max_length=128)
     name_full_formatted = models.CharField("Full Name", max_length=128)
     is_active = models.BooleanField("Active")
+    active_status_cd = models.IntegerField("Active Status")
+    active_status_dttm = models.DateTimeField("Active Status Date")
+    person_type_cd = models.IntegerField('User Type')
+    created_dttm = models.DateTimeField("Date Created")
+    update_dttm = models.DateTimeField("Date Updated")
+    update_id = models.IntegerField("Updated by")
 
     def __str__(self):
         return self.name_full_formatted
