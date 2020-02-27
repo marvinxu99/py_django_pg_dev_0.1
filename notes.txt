@@ -7,7 +7,9 @@ https://docs.djangoproject.com/en/3.0/
 
 
 (3) Create Django superuser for admin interface
-[user@coffeehouse ~]$ python manage.py createsuperuser
+
+$ python manage.py createsuperuser
+
 Username (leave blank to use 'admin'): 
 Email address: admin@coffeehouse.com
 Password: 
