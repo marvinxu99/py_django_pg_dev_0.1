@@ -4,7 +4,11 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
-from .models import Question, Choice
+from django.core.mail import send_mail
+from django.conf import settings
+
+from polls.models import Question, Choice
+
 
 def index(request):
     return render(request, 'polls/index.html')
@@ -111,3 +115,12 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+def email(request):
+    subject = 'Thank you for registering to our site'
+    message = ' it  means a world to us '
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['marvinxu99@hotmail.com', 'winnpysoft@gmail.com']
+    send_mail( subject, message, email_from, recipient_list )
+    return render(request, 'polls/email_sent.html')
+
