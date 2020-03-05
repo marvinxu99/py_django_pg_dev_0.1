@@ -1,7 +1,7 @@
 # Custom Admin Page:
 # https://docs.djangoproject.com/en/3.0/intro/tutorial07/
 from django.contrib import admin
-from .models import Question, Choice, Person, Person_Alias, Code_Value
+from .models import Question, Choice, Person, Person_Alias, CodeValue
 
 
 class ChoiceInline(admin.TabularInline):
@@ -65,5 +65,5 @@ class PersonAdmin(admin.ModelAdmin):
 
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Person, PersonAdmin)
-admin.site.register(Code_Value)
+admin.site.register(CodeValue)
 

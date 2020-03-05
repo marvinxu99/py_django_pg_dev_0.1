@@ -1,6 +1,6 @@
 from django.db import models
 
-class Code_Value(models.Model):
+class CodeValue(models.Model):
     code_value = models.BigAutoField(primary_key=True, editable=False)
     code_set = models.IntegerField()
     definition = models.CharField(max_length=100)
@@ -23,6 +23,7 @@ class Code_Value(models.Model):
     update_task = models.IntegerField(default=0)
 
     class Meta:
+        db_table = "code_value"
         indexes = [
             models.Index(fields=['code_set'], name='code_set_idx'),
             models.Index(fields=['display_key'], name='display_key_idx'),

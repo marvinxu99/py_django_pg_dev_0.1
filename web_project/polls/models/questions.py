@@ -6,9 +6,10 @@ from django.utils import timezone
 
 
 class Question(models.Model):
-    question_id = models.BigAutoField(primary_key=True, editable=False)
+    id = models.BigAutoField(primary_key=True, editable=False)
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
+    opened = models.BooleanField(default=True)
 
     def __str__(self):
         return self.question_text
