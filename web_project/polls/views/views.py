@@ -66,13 +66,13 @@ def detail(request, question_id):
     
     try:
         prev_q = question.get_previous_by_pub_date(pub_date__lte=timezone.now())
-        prev_id = prev_q.id
+        prev_id = prev_q.question_id
     except:
         prev_id = 0
 
     try:
         next_q = question.get_next_by_pub_date(pub_date__lte=timezone.now())
-        next_id = next_q.id
+        next_id = next_q.question_id
     except:
         next_id = 0
     
@@ -111,7 +111,8 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
+
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+        return HttpResponseRedirect(reverse('polls:results', args=(question.question_id,)))

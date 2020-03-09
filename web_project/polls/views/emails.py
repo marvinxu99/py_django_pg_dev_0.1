@@ -9,5 +9,6 @@ def email(request):
     email_from = settings.EMAIL_HOST_USER
     recipient_list = ['marvinxu99@hotmail.com', 'winnpysoft@gmail.com']
     send_mail( subject, message, email_from, recipient_list )
+    
     return render(request, 'polls/email_sent.html')
 
