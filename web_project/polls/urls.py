@@ -20,6 +20,10 @@ urlpatterns = [
     path('about/', views.about, name='about'),
 
     path('contact/', views.contact, name='contact'),
+
     path('email/', views.email, name='email'),
+
+    path('barcode_req/', views.barcode_req, name='barcode_req'),
+    path('barcode_disp/', views.barcode_disp, name='barcode_disp'),
 
 ]

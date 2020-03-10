@@ -31,7 +31,8 @@ body {
     background: url("images/background2.jpg");
     background-repeat:  no-repeat;
     background-size: cover;
-    color: white
+    color: white;
+    height: 100%;
 }
 
 li a {
@@ -50,4 +51,11 @@ div a {
 
 .warning {
     color: red;
+}
+
+footer {
+    clear: both;
+    position: relative;
+    height: 200px;
+    margin-top: -200px;
 }
