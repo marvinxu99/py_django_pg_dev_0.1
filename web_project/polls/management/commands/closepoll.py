@@ -5,7 +5,9 @@ The closepoll.py module has only one requirement – it must define a class
 Command that extends BaseCommand or one of its subclasses.
 
 > python manage.py <poll_id>
+
 '''
+
 from django.core.management.base import BaseCommand, CommandError
 from polls.models import Question as Poll
 

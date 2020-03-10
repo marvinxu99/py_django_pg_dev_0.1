@@ -99,26 +99,27 @@ DATABASES = {
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
 
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'winndb_poll_dev',
-        'USER': 'winter',
-        'PASSWORD': 'winter',
-        'HOST': 'localhost',
-        'PORT': '',
-        # 'OPTIONS': {
-        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        #     }
-    }
-
     # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'ENGINE': 'django.db.backends.mysql',
     #     'NAME': 'winndb_poll_dev',
     #     'USER': 'winter',
     #     'PASSWORD': 'winter',
     #     'HOST': 'localhost',
-    #     'PORT': '5432',
+    #     'PORT': '',
+    #     # 'OPTIONS': {
+    #     #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+    #     #     }
     # }
+
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'winndb_poll_dev',
+        'USER': 'winter',
+        'PASSWORD': 'winter',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+    
 }
 
 

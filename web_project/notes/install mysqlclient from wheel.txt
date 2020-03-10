@@ -9,3 +9,4 @@ Activate the virtual environment, then
 (5) ensure "winndb_poll_dev" database is created
 (6) python mange.py migrate
 (7) python manage.py createsuperuser
+

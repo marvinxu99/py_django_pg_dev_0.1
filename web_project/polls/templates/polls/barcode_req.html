@@ -1,0 +1,23 @@
+{% extends "polls/layout_general.html" %}
+{% block title %}
+Barcode Generator
+{% endblock %}
+
+{% block content %}
+<h2>Barcode Generator</h2>
+
+<form action="{% url 'polls:vote' question.question_id %}" method="post">
+    {% csrf_token %}
+    
+    <h3>(1) Select a barcode type: </h3>
+    <input type="radio" name="choice" id="choice1" value="1">
+    <label for="choice1">QR Code</label><br>
+
+    <h3>(2) Type in the data to be included in the barcode:  </h3>
+    <input type='text' name='bc_data' id='bc_data' value="your data">
+
+    <h3>(3) click on the button to generate a barcode</h3>
+    <input type="submit" value="Generate Barcode">
+</form>
+
+{% endblock %}
