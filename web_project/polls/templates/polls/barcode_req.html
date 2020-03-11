@@ -1,4 +1,4 @@
-{% extends "polls/layout_general.html" %}
+{% extends "polls/layout_generic.html" %}
 {% block title %}
 Barcode Generator
 {% endblock %}
@@ -11,11 +11,14 @@ Barcode Generator
         {% csrf_token %}
         
         <h3>(1) Select a barcode type: </h3>
-        <input type="radio" name="choice" id="choice1" value="1">
-        <label for="choice1">QR Code</label><br>
+        {% for barcode_type in barcode_types %}
+        <input type="radio" name="barcode_type" id="barcode_type{{ forloop.counter }}" value="{{ barcode_type }}">
+        <label for="barcode_type{{ forloop.counter }}">{{ barcode_type }}</label><br>
+        {% endfor %}
+    
 
         <h3>(2) Type in the data to be included in the barcode:  </h3>
-        <input type='text' name='bc_data' id='bc_data' value="" placeholder="your data">
+        <input type='text' name='barcode_data' id='barcode_data' value="" placeholder="your data">
 
         <h3>(3) click on the button to generate a barcode</h3>
         <input type="submit" value="Generate Barcode">

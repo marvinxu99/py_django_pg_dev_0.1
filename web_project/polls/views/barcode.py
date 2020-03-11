@@ -54,7 +54,7 @@ def generate_barcode(text=None):
 def barcode_req(request):
     barcode_types = ['QR Code', 'other code']    
     context = {
-            'choices': barcode_types,
+            'barcode_types': barcode_types,
         }
     return render(request, 'polls/barcode_req.html', context)
 

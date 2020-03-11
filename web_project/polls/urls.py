@@ -19,7 +19,7 @@ urlpatterns = [
 
     path('about/', views.about, name='about'),
 
-    path('contact/', views.contact, name='contact'),
+    path('contact/', views.email_contact, name='contact'),
 
     path('email/', views.email, name='email'),
 
