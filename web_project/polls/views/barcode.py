@@ -28,8 +28,9 @@
 #
 
 from django.shortcuts import render
-#from django.utils import timezone
+from django.conf import settings
 import datetime
+import os
 
 import treepoem
 
@@ -46,9 +47,13 @@ def generate_barcode(text=None):
         data=data
         )
 
-    # file_name = 'barcode_' + datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S") + '.png'
-    # image.convert('1').save(file_name)
-    image.convert('1').save('barcode.png')
+    # /media/generated_barcode/ os.path.join(BASE_DIR, 'templates'
+    f_path = os.path.join(settings.BASE_DIR, 'generated_codes')
+    f_name = 'barcode_' + datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S") + '.png'
+    file_name = f_path + "\\" + f_name
+    print(file_name)
+    image.convert('1').save(file_name)
+    # image.convert('1').save('barcode.png')
 
 
 def barcode_req(request):
@@ -60,6 +65,13 @@ def barcode_req(request):
 
 
 def barcode_disp(request):
+    print(request.POST['barcode_type'])
+    print(request.POST['barcode_data'])
+    print(settings.BASE_DIR)
+
+    text = request.POST['barcode_data']
+
+    generate_barcode(text)
         
     return render(request, 'polls/barcode_disp.html')
 

@@ -16,14 +16,16 @@
         <a href="{% url 'polls:email' %}" class="navbar-item">Email</a>
         <a href="{% url 'polls:barcode_req' %}" class="navbar-item">Barcode</a>
     </div>
-
     <div class="body-content">
         {% block content %}
         {% endblock %}
     </div>
     <div class='footer'>
         <hr/>
-        <p>© Winter WinnPy 2019 - 2020</p>
+        <h3 style='color:antiquewhite'>
+            © Winter WinnPy 2019 - 2020. <br> 
+            It is {% now "SHORT_DATETIME_FORMAT" %}
+        </h3>
     </div>
 </body>
 
