@@ -3,3 +3,8 @@ https://devcenter.heroku.com/articles/getting-started-with-python#set-up
 DEPLOYING PYTHON AND DJANGO APPS ON HEROKU
 https://devcenter.heroku.com/articles/deploying-python
 
+
+(1) locally run pyrhon manage.py makemigrations
+(2) git push heroku master
+(3) add "release: python manage.py migrate" to procfile
+
