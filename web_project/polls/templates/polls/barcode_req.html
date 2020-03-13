@@ -12,8 +12,8 @@ Barcode Generator
         
         <h3>1. Select a barcode type: </h3>
         {% for barcode_type in barcode_types %}
-        <input type="radio" name="barcode_type" id="barcode_type{{ forloop.counter }}" value="{{ barcode_type }}">
-        <label for="barcode_type{{ forloop.counter }}">{{ barcode_type }}</label><br>
+        <input type="radio" name="barcode_type" id="barcode_type{{ forloop.counter }}" value="{{ barcode_type.0 }}">
+        <label for="barcode_type{{ forloop.counter }}">{{ barcode_type.1 }}</label><br>
         {% endfor %}
     
 
