@@ -7,7 +7,7 @@ Barcode Generator
 
 <h2>Here is your barcode:</h2>
 
-<!--
+<!--this does not work
 <img src="{{ barcode_url }}" alt="barcode image" />
 <img src="barcode.png" alt="barcode image" />
 -->
@@ -16,10 +16,9 @@ Barcode Generator
     {% load static %}
     <img src="{% static 'barcode.png' %}" alt="barcode image">
     <p>
-        data: {{ barcode_data }} <br>
+        data: {{ barcode_data }}<br>
         type: {{ code_type }}
     </p>
-
 </div>
 </p>
 </p>

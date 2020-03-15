@@ -31,11 +31,12 @@ SECRET_KEY = env.str('DJ_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DOMAIN = 'DEV'
 
 ALLOWED_HOSTS = ['localhost']
 
 
-# Application definition
+# Application definitionrunser
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -162,6 +163,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_collected')
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, "generated_codes"),
@@ -169,3 +171,5 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+FILE_UPLOAD_TEMP_DIR = os.path.join(BASE_DIR, 'uploaded_files_temp')
