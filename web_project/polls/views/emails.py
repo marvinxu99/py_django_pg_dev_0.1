@@ -15,7 +15,7 @@ def email(request):
 
     context = {
             'domain': settings.DOMAIN,
-            'msg_text': "The emails was sent successfully!",
+            'msg_text': "The email was sent successfully!",
         }
     
     return render(request, 'polls/successful.html', context)
