@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'accounts.apps.AccountsConfig',
     'quickblog.apps.QuickblogConfig',
+
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

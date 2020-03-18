@@ -112,7 +112,7 @@ class QuestionDetailViewTests(TestCase):
         """
         future_question = create_question(
             question_text='Future question.', days=5)
-        url = reverse('polls:detail', args=(future_question.id,))
+        url = reverse('polls:detail', args=(future_question.question_id,))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
@@ -123,7 +123,7 @@ class QuestionDetailViewTests(TestCase):
         """
         past_question = create_question(
             question_text='Past Question.', days=-5)
-        url = reverse('polls:detail', args=(past_question.id,))
+        url = reverse('polls:detail', args=(past_question.question_id,))
         response = self.client.get(url)
         self.assertContains(response, past_question.question_text)
 
@@ -136,7 +136,7 @@ class QuestionResultsViewTests(TestCase):
         """
         future_question = create_question(
             question_text='Future question.', days=5)
-        url = reverse('polls:results', args=(future_question.id,))
+        url = reverse('polls:results', args=(future_question.question_id,))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
@@ -147,6 +147,6 @@ class QuestionResultsViewTests(TestCase):
         """
         past_question = create_question(
             question_text='Past Question.', days=-5)
-        url = reverse('polls:results', args=(past_question.id,))
+        url = reverse('polls:results', args=(past_question.question_id,))
         response = self.client.get(url)
         self.assertContains(response, past_question.question_text)
