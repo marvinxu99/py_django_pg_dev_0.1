@@ -84,6 +84,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'web_project.wsgi.application'
 
 # Email backend
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = env.str('MY_GMAIL')
