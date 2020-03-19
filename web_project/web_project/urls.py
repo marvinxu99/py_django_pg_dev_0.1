@@ -25,12 +25,15 @@ from accounts import views as accounts_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('polls/', include('polls.urls')),
-    path('', polls_views.index, name='index'),
+    path('', polls_views.index, name='home'),
     path('winter_winnpy/', polls_views.winter_winnpy, name='winter_winnpy'),
     path('winter_univer/', polls_views.winter_univer, name='winter_univer'),
     path('face_recognition/', polls_views.face_recognition, name='face_recognition'),
+
     path('signup/', accounts_views.signup, name='signup'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()
