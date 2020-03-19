@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.auth import views as auth_views
+
 
 from polls import views as polls_views
 from accounts import views as accounts_views
@@ -28,6 +30,7 @@ urlpatterns = [
     path('winter_univer/', polls_views.winter_univer, name='winter_univer'),
     path('face_recognition/', polls_views.face_recognition, name='face_recognition'),
     path('signup/', accounts_views.signup, name='signup'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
