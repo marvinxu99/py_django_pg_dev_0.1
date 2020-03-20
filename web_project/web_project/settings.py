@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'accounts.apps.AccountsConfig',
     'quickblog.apps.QuickblogConfig',
+    'boards.apps.BoardsConfig',
 
     'widget_tweaks',
 ]
@@ -180,5 +181,6 @@ MEDIA_URL = '/media/'
 
 LOGOUT_REDIRECT_URL = 'home'
 LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
 
 FILE_UPLOAD_TEMP_DIR = os.path.join(BASE_DIR, 'uploaded_files_temp')
