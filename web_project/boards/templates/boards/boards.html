@@ -1,0 +1,8 @@
+{% extends "boards/base_boards.html" %}
+
+
+{% block content %}
+  {% for board in boards %}
+    {{ board.name }} <br>
+  {% endfor %}
+{% endblock %}

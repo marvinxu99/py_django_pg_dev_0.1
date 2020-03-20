@@ -25,6 +25,9 @@ from accounts import views as accounts_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('polls/', include('polls.urls')),
+
+    path('boards/', include('boards.urls')),
+
     path('', polls_views.index, name='home'),
     path('winter_winnpy/', polls_views.winter_winnpy, name='winter_winnpy'),
     path('winter_univer/', polls_views.winter_univer, name='winter_univer'),
