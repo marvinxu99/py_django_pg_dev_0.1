@@ -3,15 +3,14 @@
 {% load static %}
 
 {% block stylesheet %}
-  <link rel="stylesheet" href="{% static 'accounts/css/accounts.css' %}">
+  <link rel="stylesheet" href="{% static 'boards/css/boards.css' %}">
 {% endblock %}
 
-{% block body %}
-  <div class="container">
-    <h1 class="text-center logo my-4">
-      <a href="{% url 'boards:boards_home' %}">Winter WinnPy</a>
-    </h1>
-    {% block content %}
-    {% endblock %}
-  </div>
+{% block breadcrumb %}
+<li class="breadcrumb-item">Winter's Boards</li>
+{% endblock %}  
+
+{% block content %}
 {% endblock %}
+
+

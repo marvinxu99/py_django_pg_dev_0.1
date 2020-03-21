@@ -2,7 +2,7 @@
     background-color: lightslategray;
     font-size: 1em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: white;
+    color: black;
     padding: 8px 5px 8px 5px;
 }
 
@@ -24,20 +24,20 @@
 .body-content {
     padding: 5px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
+    color: black;
 }
 
 body {
-    background: url("images/background2.jpg");
+    background: url("img/leaves.png");
     background-repeat:  no-repeat;
     background-size: cover;
-    color: white;
+    color: black;
     height: 100%;
 }
 
 li a {
     font-size: medium;
-    color: white;
+    color: black;
 }
 
 ul li a {
@@ -46,7 +46,7 @@ ul li a {
 
 div a {
     font-size: large;
-    color: white
+    color: black;
 }
 
 .warning {
