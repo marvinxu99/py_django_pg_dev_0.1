@@ -1,6 +1,6 @@
 {% extends 'accounts/base_accounts.html' %}
 
-{% block title %}Log in to Winter WinnPy{% endblock %}
+{% block title %}Log in to Winter Winn{% endblock %}
 
 {% block content %}
   <div class="row justify-content-center">
@@ -15,12 +15,12 @@
           </form>
         </div>
         <div class="card-footer text-muted text-center">
-          New to Django Boards? <a href="{% url 'signup' %}">Sign up</a>
+          New to Winter Winn? <a href="{% url 'accounts:signup' %}">Sign up</a>
         </div>
       </div>
       <div class="text-center py-2">
         <small>
-          <a href="{% url 'password_reset' %}" class="text-muted">Forgot your password?</a>
+          <a href="{% url 'accounts:password_reset' %}" class="text-muted">Forgot your password?</a>
         </small>
       </div>
     </div>
