@@ -6,7 +6,7 @@ Winter Winn
 {% endblock %}
 
 {% block content %}
-<h3>Select an app to run:</h2>
+<h4>Select an app to run:</h4>
 <ul>
     <li><a href="boards/">Boards</a></li>
 </ul>
@@ -17,12 +17,12 @@ Winter Winn
     <li><a href="admin/">Admin site</a></li>
 </ul>
 
-<h3>Select a sibling website to browse:</h2>
-<ul>
-    <li><a href="winter_winnpy/">Winter WinnPy (React + Node + Firebase + OAuth)</a></li>
-    <li><a href="winter_univer/">Winter's Website (Python + Flask)</a></li>
-    <li><a href="face_recognition/">Smart Face Recognition (React + Node + PostgreSQL)</a></li>
-</ul>
+<h4>Sibling websites:</h4>
+<div class="list-group">
+  <a href="winter_winnpy/" class="list-group-item list-group-item-action">&bull; Winter WinnPy (React + Node + Firebase + OAuth)</a>
+  <a href="winter_univer/" class="list-group-item list-group-item-action">&bull; Winter's Website (Python + Flask)</a>
+  <a href="face_recognition/" class="list-group-item list-group-item-action">&bull; Smart Face Recognition (React + Node + PostgreSQL)</a>
+</div>
 {% endblock %}
 
 {% block breadcrumb %}
