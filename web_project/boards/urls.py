@@ -6,8 +6,8 @@ app_name = 'boards'
 
 urlpatterns = [
     path('', views.boards_home, name='boards_home'),
-    path('<int:board_id>/new/', views.new_topic, name='new_topic'),
-    path('<int:board_id>/', views.board_topics, name='board_topics'),
-    path('<int:board_id>/topics/<int:topic_id>/', views.topic_posts, name='topic_posts'),  
-    path('<int:board_id>/topics/<int:topic_id>/reply/', views.topic_reply, name='topic_reply'),
+    path('<int:board_pk>/new/', views.new_topic, name='new_topic'),
+    path('<int:board_pk>/', views.board_topics, name='board_topics'),
+    path('<int:board_pk>/topics/<int:topic_pk>/', views.topic_posts, name='topic_posts'),  
+    path('<int:board_pk>/topics/<int:topic_pk>/reply/', views.reply_topic, name='reply_topic'),
 ]

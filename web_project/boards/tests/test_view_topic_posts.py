@@ -12,7 +12,7 @@ class TopicPostsTests(TestCase):
         user = User.objects.create_user(username='john', email='john@doe.com', password='123')
         topic = Topic.objects.create(subject='Hello, world', board=board, starter=user)
         Post.objects.create(message='Lorem ipsum dolor sit amet', topic=topic, created_by=user)
-        url = reverse('boards:topic_posts', kwargs={'board_id': board.pk, 'topic_id': topic.pk})
+        url = reverse('boards:topic_posts', kwargs={'board_pk': board.pk, 'topic_pk': topic.pk})
         self.response = self.client.get(url)
 
     def test_status_code(self):

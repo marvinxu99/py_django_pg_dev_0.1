@@ -25,20 +25,20 @@ class NewTopicTests(TestCase):
         topic = Topic.objects.create(subject='Hello, world', board=board, starter=user)
         Post.objects.create(message='Lorem ipsum dolor sit amet', topic=topic, created_by=user)
                
-        url = reverse('boards:topic_posts', kwargs={'board_id': board.pk, 'topic_id': topic.pk})
+        url = reverse('boards:topic_posts', kwargs={'board_pk': board.pk, 'topic_pk': topic.pk})
         self.response = self.client.get(url)
         
 
 
     def test_new_topic_view_success_status_code(self):
-        url = reverse('boards:new_topic', kwargs={ 'board_id': 1 })
+        url = reverse('boards:new_topic', kwargs={ 'board_pk': 1 })
         print('URL = ' + str(url))
         response = self.client.get(url)
         self.assertEquals(response.status_code, 200)
 
 
     def test_new_topic_view_not_found_status_code(self):
-        url = reverse('boards:new_topic', kwargs={ 'board_id': 99 })
+        url = reverse('boards:new_topic', kwargs={ 'board_pk': 99 })
         response = self.client.get(url)
         print(response['location'])
         self.assertEquals(response.status_code, 404)
@@ -55,9 +55,9 @@ class NewTopicTests(TestCase):
         self.assertContains(response, 'href="{0}"'.format(board_topics_url))
 
     def test_board_topics_view_contains_navigation_links(self):
-        board_topics_url = reverse('boards:board_topics', kwargs={'board_id': 1})
+        board_topics_url = reverse('boards:board_topics', kwargs={'board_pk': 1})
         homepage_url = reverse('boards:boards_home')
-        new_topic_url = reverse('boards:new_topic', kwargs={'board_id': 1})
+        new_topic_url = reverse('boards:new_topic', kwargs={'board_pk': 1})
 
         response = self.client.get(board_topics_url)
 
@@ -66,12 +66,12 @@ class NewTopicTests(TestCase):
 
 
     def test_csrf(self):
-        url = reverse('boards:new_topic', kwargs={ 'board_id': 1 })
+        url = reverse('boards:new_topic', kwargs={ 'board_pk': 1 })
         response = self.client.get(url)
         self.assertContains(response, 'csrfmiddlewaretoken')
 
     def test_new_topic_valid_post_data(self):
-        url = reverse('boards:new_topic', kwargs={'board_id': 1})
+        url = reverse('boards:new_topic', kwargs={'board_pk': 1})
         data = {
             'subject': 'Test title',
             'message': 'Lorem ipsum dolor sit amet'
@@ -85,7 +85,7 @@ class NewTopicTests(TestCase):
         Invalid post data should not redirect
         The expected behavior is to show the form again with validation errors
         '''
-        url = reverse('boards:new_topic', kwargs={'board_id': 1})
+        url = reverse('boards:new_topic', kwargs={'board_pk': 1})
         response = self.client.post(url, {})
         self.assertEquals(response.status_code, 200)
 
@@ -94,7 +94,7 @@ class NewTopicTests(TestCase):
         Invalid post data should not redirect
         The expected behavior is to show the form again with validation errors
         '''
-        url = reverse('boards:new_topic', kwargs={'board_id': 1})
+        url = reverse('boards:new_topic', kwargs={'board_pk': 1})
         data = {
             'subject': '',
             'message': ''
@@ -105,7 +105,7 @@ class NewTopicTests(TestCase):
         self.assertFalse(Post.objects.exists())
 
     def test_contains_form(self):  # <- new test
-        url = reverse('boards:new_topic', kwargs={ 'board_id': 1 })
+        url = reverse('boards:new_topic', kwargs={ 'board_pk': 1 })
 
         response = self.client.get(url)
         form = response.context.get('form')
@@ -116,7 +116,7 @@ class NewTopicTests(TestCase):
         Invalid post data should not redirect
         The expected behavior is to show the form again with validation errors
         '''
-        url = reverse('boards:new_topic', kwargs={'board_id': 1})
+        url = reverse('boards:new_topic', kwargs={'board_pk': 1})
         response = self.client.post(url, {})
         form = response.context.get('form')
         self.assertEquals(response.status_code, 200)

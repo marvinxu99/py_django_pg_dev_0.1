@@ -14,13 +14,13 @@ class BoardTopicsTests(TestCase):
         
 
     def test_board_topics_view_success_status_code(self):
-        url = reverse('boards:board_topics', kwargs={ 'board_id': 1 })
+        url = reverse('boards:board_topics', kwargs={ 'board_pk': 1 })
         print("URL=" + str(url))
         response = self.client.get(url)
         self.assertEquals(response.status_code, 200)
 
     def test_board_topics_view_not_found_status_code(self):
-        url = reverse('boards:board_topics', kwargs={ 'board_id': 99 })
+        url = reverse('boards:board_topics', kwargs={ 'board_pk': 99 })
         print("URL=" + str(url))
         response = self.client.get(url)
         self.assertEquals(response.status_code, 404)
@@ -30,7 +30,7 @@ class BoardTopicsTests(TestCase):
         self.assertEquals(view.func, board_topics)
 
     # def test_board_topics_view_contains_link_back_to_homepage(self):
-    #     board_topics_url = reverse('boards:board_topics', kwargs={'board_id': 1})
+    #     board_topics_url = reverse('boards:board_topics', kwargs={'board_pk': 1})
     #     response = self.client.get(board_topics_url)
     #     homepage_url = reverse('boards:boards_home')
     #     print('href=' + 'href="{0}"'.format(homepage_url))
