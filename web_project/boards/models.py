@@ -16,7 +16,7 @@ class Topic(models.Model):
     starter = models.ForeignKey(User, related_name='topics', on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.name
+        return self.subject
 
 
 class Post(models.Model):
@@ -29,7 +29,7 @@ class Post(models.Model):
     # related_name='+' instructs Django that we don’t need this reverse relationship
 
     def __str__(self):
-        return self.name
+        return self.message
 
 '''
 CASCADE: When the referenced object is deleted, also delete the objects that have references 
