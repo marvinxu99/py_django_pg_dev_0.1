@@ -27,6 +27,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
 
     path('', polls_views.index, name='home'),
+    
     path('winter_winnpy/', polls_views.winter_winnpy, name='winter_winnpy'),
     path('winter_univer/', polls_views.winter_univer, name='winter_univer'),
     path('face_recognition/', polls_views.face_recognition, name='face_recognition'),

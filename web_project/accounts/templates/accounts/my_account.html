@@ -12,6 +12,7 @@
         {% csrf_token %}
         {% include 'includes/form.html' %}
         <button type="submit" class="btn btn-success">Save changes</button>
+        <a href="{% url 'home' %}" class="btn btn-outline-secondary" role="button">Cancel</a>
       </form>
     </div>
   </div>

@@ -9,7 +9,14 @@ from ..forms import NewTopicForm
 
 class BoardTopicsTests(TestCase):
     def setUp(self):
-        self.board = Board.objects.create(name='Django2', description='Django board.')
+        self.board = Board.objects.create(name='Django', description='Django board.')
+        self.username = 'john'
+        self.password = '123'
+        user = User.objects.create_user(username=self.username, email='john@doe.com', password=self.password)
+        self.topic = Topic.objects.create(subject='Hello, world', board=self.board, starter=user)
+        Post.objects.create(message='Lorem ipsum dolor sit amet', topic=self.topic, created_by=user)
+        #self.url = reverse('boards:reply_topic', kwargs={'board_pk': self.board.pk, 'topic_pk': self.topic.pk})
+
 
         
     def test_board_topics_view_success_status_code(self):
