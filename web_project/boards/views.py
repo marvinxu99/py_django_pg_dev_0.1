@@ -2,10 +2,11 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
-from django.views.generic import UpdateView, ListView
+from django.views.generic import UpdateView, ListView, DeleteView
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Board, Topic, Post
 from .forms import NewTopicForm, PostForm
@@ -179,3 +180,33 @@ class PostUpdateView(UpdateView):
         post.updated_at = timezone.now()
         post.save()
         return redirect('boards:topic_posts', board_pk=post.topic.board.pk, topic_pk=post.topic.pk)
+
+
+# class PostDeleteView(LoginRequiredMixin, DeleteView):
+#     '''
+#     Example of Using DeleteView and LoginRequiredMixin 
+#     '''
+#     model = Post
+#     fields = ('message', )
+#     template_name = 'boards/delete_post.html'
+#     success_url = '/'
+#     pk_url_kwarg = 'post_pk'
+#     context_object_name = 'post'
+
+#     def form_valid(self, form):
+#         post = form.save(commit=False)
+#         post.updated_by = self.request.user
+#         post.updated_at = timezone.now()
+#         post.save()
+#         return redirect('boards:topic_posts', board_pk=post.topic.board.pk, topic_pk=post.topic.pk)
+
+@login_required
+def delete_post(request, board_pk, topic_pk, post_pk):    
+    post = get_object_or_404(
+        Post, 
+        topic__pk=topic_pk,
+        created_by=request.user,
+        pk=post_pk
+    )
+    post.delete()
+    return redirect('boards:topic_posts', board_pk=post.topic.board.pk, topic_pk=post.topic.pk)
