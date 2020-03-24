@@ -6,12 +6,8 @@
   <link rel="stylesheet" href="{% static 'accounts/css/accounts.css' %}">
 {% endblock %}
 
-{% block body %}
-  <div class="container">
-    <h1 class="text-center logo my-4">
-      <a href="{% url 'home' %}">Winter Winn</a>
-    </h1>
-    {% block content %}
-    {% endblock %}
-  </div>
+{% block breadcrumb %}
+{% endblock %}  
+
+{% block content %}
 {% endblock %}

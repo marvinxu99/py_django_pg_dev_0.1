@@ -15,6 +15,7 @@
 <div class="mb-4">
   <a href="{% url 'boards:new_topic' board.pk %}" class="btn btn-primary">New topic</a>
 </div>
+
 <table class="table">
   <thead class="thead-inverse">
     <tr>
@@ -37,4 +38,7 @@
     {% endfor %}
   </tbody>
 </table>
+
+{% include 'includes/pagination.html' %}
+  
 {% endblock %}

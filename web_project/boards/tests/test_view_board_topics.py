@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 
-from ..views import boards_home, board_topics, new_topic
+from ..views import TopicListView
 from ..models import Board, Topic, Post
 from ..forms import NewTopicForm
 
@@ -12,7 +12,6 @@ class BoardTopicsTests(TestCase):
         self.board = Board.objects.create(name='Django2', description='Django board.')
 
         
-
     def test_board_topics_view_success_status_code(self):
         url = reverse('boards:board_topics', kwargs={ 'board_pk': 1 })
         print("URL=" + str(url))
@@ -27,7 +26,7 @@ class BoardTopicsTests(TestCase):
 
     def test_board_topics_url_resolves_board_topics_view(self):
         view = resolve('/boards/1/')
-        self.assertEquals(view.func, board_topics)
+        self.assertEquals(view.func.view_class, TopicListView)
 
     # def test_board_topics_view_contains_link_back_to_homepage(self):
     #     board_topics_url = reverse('boards:board_topics', kwargs={'board_pk': 1})

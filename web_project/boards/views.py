@@ -2,23 +2,76 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, ListView
 from django.utils import timezone
 from django.utils.decorators import method_decorator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Board, Topic, Post
 from .forms import NewTopicForm, PostForm
 
 
-def boards_home(request):
-    boards = Board.objects.all()
-    return render(request, 'boards/boards.html', { 'boards': boards })
+# def boards_home(request):
+#     boards = Board.objects.all()
+#     return render(request, 'boards/boards_home.html', { 'boards': boards })
+class BoardListView(ListView):
+    model = Board
+    context_object_name = 'boards'
+    template_name = 'boards/boards_home.html'
+
 
 def board_topics(request, board_pk):
+    '''
+    Pagination using the regular function-based views (FBV)
+    See below for Generic Class-Based View (GCBV) pagination
+    '''
     board = get_object_or_404(Board, pk=board_pk)
-    # genearte a replies 'column' on the fly
-    topics = board.topics.order_by('-last_updated').annotate(replies=Count('posts') - 1)
-    return render(request, 'boards/board_topics.html', { 'board': board, 'topics': topics })
+    queryset = board.topics.order_by('-last_updated').annotate(replies=Count('posts') - 1)
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(queryset, 20)
+
+    try:
+        topics = paginator.page(page)
+    except PageNotAnInteger:
+        # fallback to the first page
+        topics = paginator.page(1)
+    except EmptyPage:
+        # probably the user tried to add a page number
+        # in the url, so we fallback to the last page
+        topics = paginator.page(paginator.num_pages)
+  
+    return render(request, 'boards/board_topics_fbv.html', { 'board': board, 'topics': topics })
+
+
+class TopicListView(ListView):
+    '''
+    Generic Class-Based View (GCBV) pagination
+    See above for pagination using the regular function-based views (FBV)
+
+    While using pagination with class-based views, the way we interact with the paginator in the 
+    template is a little bit different. It will make available the following variables in the 
+    template: paginator, page_obj, is_paginated, object_list, and also a variable with the name 
+    we defined in the context_object_name. In our case this extra variable will be named topics, 
+    and it will be equivalent to object_list.
+
+    Now about the whole get_context_data thing, well, that’s how we add stuff to the request 
+    context when extending a GCBV
+    '''
+    model = Topic
+    context_object_name = 'topics'
+    template_name = 'boards/board_topics.html'
+    paginate_by = 15
+
+    def get_context_data(self, **kwargs):
+        kwargs['board'] = self.board
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        self.board = get_object_or_404(Board, pk=self.kwargs.get('board_pk'))
+        queryset = self.board.topics.order_by('-last_updated').annotate(replies=Count('posts') - 1)
+        return queryset
+
 
 @login_required
 def new_topic(request, board_pk):
@@ -43,11 +96,29 @@ def new_topic(request, board_pk):
 
     return render(request, 'boards/new_topic.html', { 'board': board, 'form': form })
 
-def topic_posts(request, board_pk, topic_pk):
-    topic = get_object_or_404(Topic, board__pk=board_pk, pk=topic_pk)
-    topic.views += 1
-    topic.save()
-    return render(request, 'boards/topic_posts.html', { 'topic': topic })
+
+# def topic_posts(request, board_pk, topic_pk):
+#     topic = get_object_or_404(Topic, board__pk=board_pk, pk=topic_pk)
+#     topic.views += 1
+#     topic.save()
+#     return render(request, 'boards/topic_posts.html', { 'topic': topic })
+class PostListView(ListView):
+    model = Post
+    context_object_name = 'posts'
+    template_name = 'boards/topic_posts.html'
+    paginate_by = 2
+
+    def get_context_data(self, **kwargs):
+        self.topic.views += 1
+        self.topic.save()
+        kwargs['topic'] = self.topic
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        self.topic = get_object_or_404(Topic, board__pk=self.kwargs.get('board_pk'), pk=self.kwargs.get('topic_pk'))
+        queryset = self.topic.posts.order_by('created_at')
+        return queryset
+
 
 @login_required
 def reply_topic(request, board_pk, topic_pk):
