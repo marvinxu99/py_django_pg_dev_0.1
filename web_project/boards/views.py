@@ -106,7 +106,7 @@ class PostListView(ListView):
     model = Post
     context_object_name = 'posts'
     template_name = 'boards/topic_posts.html'
-    paginate_by = 2
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         self.topic.views += 1
@@ -116,7 +116,7 @@ class PostListView(ListView):
 
     def get_queryset(self):
         self.topic = get_object_or_404(Topic, board__pk=self.kwargs.get('board_pk'), pk=self.kwargs.get('topic_pk'))
-        queryset = self.topic.posts.order_by('created_at')
+        queryset = self.topic.posts.order_by('-created_at')
         return queryset
 
 
@@ -134,7 +134,9 @@ def reply_topic(request, board_pk, topic_pk):
     else:
         form = PostForm()
 
-    return render(request, 'boards/reply_topic.html', {'topic': topic, 'form': form})
+    posts = topic.posts.order_by('-created_at')
+    
+    return render(request, 'boards/reply_topic.html', {'topic': topic, 'posts': posts,'form': form})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -149,7 +151,7 @@ class PostUpdateView(UpdateView):
     # This also fixed UnauthorizedPostUpdateViewTests.test_status_code issue with 200 != 404
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(created_by=self.request.user)
+        return queryset.filter(created_by=self.request.user).order_by('-created_at')
 
 
     def form_valid(self, form):
