@@ -199,7 +199,6 @@ class PostUpdateView(UpdateView):
 #         post.updated_at = timezone.now()
 #         post.save()
 #         return redirect('boards:topic_posts', board_pk=post.topic.board.pk, topic_pk=post.topic.pk)
-
 @login_required
 def delete_post(request, board_pk, topic_pk, post_pk):    
     post = get_object_or_404(
@@ -209,4 +208,5 @@ def delete_post(request, board_pk, topic_pk, post_pk):
         pk=post_pk
     )
     post.delete()
+
     return redirect('boards:topic_posts', board_pk=post.topic.board.pk, topic_pk=post.topic.pk)
