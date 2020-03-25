@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 # import environ    # this is from python-environ-plus
 import mimetypes
-from decouple import config
+from decouple import config, Csv
 
 # env = environ.Env(
 #     # set casting, default value
@@ -33,10 +33,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('DJ_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-DOMAIN = 'DEV'
+DEBUG = config('DEBUG', default=False, cast=bool)
+DOMAIN = config('DOMAIN', default='PROD')
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definitionrunser
@@ -92,10 +92,12 @@ WSGI_APPLICATION = 'web_project.wsgi.application'
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
+
 # EMAIL_HOST_USER = env.str('MY_GMAIL')
 # EMAIL_HOST_PASSWORD = env.str('MY_GMAIL_PASSWORD')
 EMAIL_HOST_USER = config('MY_GMAIL')
 EMAIL_HOST_PASSWORD = config('MY_GMAIL_PASSWORD')
+
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 # EMAIL_USE_SSL = True
