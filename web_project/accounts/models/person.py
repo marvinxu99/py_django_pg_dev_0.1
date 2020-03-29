@@ -6,8 +6,6 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-from .user import User as CustomUser
-
 
 class Person(models.Model):
     # person_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

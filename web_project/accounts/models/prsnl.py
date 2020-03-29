@@ -1,9 +1,6 @@
 from django.db import models
 from django.conf import settings
 
-from .person import Person
-from .user import User
-
 
 class Prsnl(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -16,6 +13,10 @@ class Prsnl(models.Model):
     name_middle = models.CharField("Middle Name", max_length=128, blank=True)
     name_last = models.CharField("Last Name", max_length=128, blank=True)
     name_full_formatted = models.CharField("Full Name", max_length=128, blank=True)
+
+    class Meta:
+        verbose_name = "personnel"
+        verbose_name_plural = "personnel"
 
     def __str__(self):
         return self.name_full_formatted

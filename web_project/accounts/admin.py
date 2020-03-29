@@ -21,7 +21,7 @@ class PersonAliasInline(admin.StackedInline):
             'fields': ['is_active', 'active_status_cd'],
         }),
     )
-    extra = 1
+    extra = 0
 
 class PrsnlAliasInline(admin.StackedInline):   
     model = Prsnl_Alias
@@ -83,7 +83,7 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = ('username', 'is_staff', 'is_active',)
+    list_display = ('username', 'get_full_name', 'is_staff', 'is_active',)
     list_filter = ('username', 'is_staff', 'is_active',)
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
@@ -116,5 +116,23 @@ class PersonAdmin(admin.ModelAdmin):
     inlines = [ PersonAliasInline, ]
 
 
+class PrsnlAdmin(admin.ModelAdmin):
+    list_display = ('name_first', 'name_last', 'name_full_formatted', 'is_active')
+    list_filter = ('name_last', 'name_first')
+    fieldsets = (
+        (None, {'fields': ('name_first', 'name_middle', 'name_last', 'name_full_formatted')}),
+        (None, {'fields': ('is_active', 'active_status_cd')}),
+    )
+    add_fieldsets = (
+        (None, {'fields': ('name_first', 'name_middle', 'name_last', 'name_full_formatted')}),
+        (None, {'fields': ('is_active', 'active_status_cd')}),
+    )
+    search_fields = ['name_last', 'name_first']
+    ordering = ['name_last',]
+    verbose_name_plural = 'personnel'
+    inlines = [ PrsnlAliasInline, ]
+
+
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Person, PersonAdmin)
+admin.site.register(Prsnl, PrsnlAdmin)
