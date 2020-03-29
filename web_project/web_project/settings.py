@@ -12,8 +12,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 # import environ    # this is from python-environ-plus
-import mimetypes
+# import mimetypes
 from decouple import config, Csv
+
+
+AUTH_USER_MODEL = 'accounts.User'
 
 # env = environ.Env(
 #     # set casting, default value
@@ -34,7 +37,7 @@ SECRET_KEY = config('DJ_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
-DOMAIN = config('DOMAIN', default='PROD')
+DOMAIN = config('DOMAIN', default='DEV')
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
@@ -97,7 +100,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_HOST_PASSWORD = env.str('MY_GMAIL_PASSWORD')
 EMAIL_HOST_USER = config('MY_GMAIL')
 EMAIL_HOST_PASSWORD = config('MY_GMAIL_PASSWORD')
-
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 # EMAIL_USE_SSL = True
@@ -129,7 +131,7 @@ DATABASES = {
 
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'winndb_poll_dev',
+        'NAME': 'winn_users6',
         'USER': 'winter',
         'PASSWORD': 'winter',
         'HOST': 'localhost',
