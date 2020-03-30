@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'quickblog.apps.QuickblogConfig',
     'boards.apps.BoardsConfig',
+    'catalog.apps.CatalogConfig',
 
     'widget_tweaks',
 ]

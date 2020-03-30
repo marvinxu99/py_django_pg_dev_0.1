@@ -25,6 +25,8 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('boards/', include('boards.urls')),
     path('accounts/', include('accounts.urls')),
+    path('catalog/', include('catalog.urls')),
+    #path('', RedirectView.as_view(url='catalog/', permanent=True)),
 
     path('', polls_views.index, name='home'),
     

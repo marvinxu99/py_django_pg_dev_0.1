@@ -10,8 +10,13 @@ from django.utils import timezone
 class Person(models.Model):
     # person_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     person_id = models.BigAutoField(primary_key=True, editable=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  
-    
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        unique=True, 
+        on_delete=models.CASCADE,
+        limit_choices_to={'is_staff': False},
+    )
+   
     name_first = models.CharField("Fist Name", max_length=128, default='John')
     name_middle = models.CharField("Middle Name", max_length=128, blank=True, null=True)
     name_last = models.CharField("Last Name", max_length=128, default='Doe')

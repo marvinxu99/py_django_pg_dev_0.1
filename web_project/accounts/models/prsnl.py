@@ -1,9 +1,16 @@
 from django.db import models
 from django.conf import settings
 
+from ..globals import POSITION_CD
+
 
 class Prsnl(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        unique=True, 
+        on_delete=models.CASCADE,
+        limit_choices_to={'is_staff': True},
+    )
     prsnl_id = models.BigAutoField(primary_key=True, editable=False)
 
     is_active = models.BooleanField('Active', default=False)
@@ -13,6 +20,7 @@ class Prsnl(models.Model):
     name_middle = models.CharField("Middle Name", max_length=128, blank=True)
     name_last = models.CharField("Last Name", max_length=128, blank=True)
     name_full_formatted = models.CharField("Full Name", max_length=128, blank=True)
+    position = models.CharField(max_length=3, choices=POSITION_CD, default='N01')
 
     class Meta:
         verbose_name = "personnel"
