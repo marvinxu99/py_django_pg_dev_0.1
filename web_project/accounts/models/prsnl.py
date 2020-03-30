@@ -5,13 +5,14 @@ from ..globals import POSITION_CD
 
 
 class Prsnl(models.Model):
-    user = models.ForeignKey(
+    prsnl_id = models.BigAutoField(primary_key=True, editable=False)
+
+    user = models.OneToOneField(
         settings.AUTH_USER_MODEL, 
-        unique=True, 
         on_delete=models.CASCADE,
         limit_choices_to={'is_staff': True},
+        verbose_name='username',
     )
-    prsnl_id = models.BigAutoField(primary_key=True, editable=False)
 
     is_active = models.BooleanField('Active', default=False)
     active_status_cd = models.IntegerField('Ative Status', default=1)
@@ -23,8 +24,8 @@ class Prsnl(models.Model):
     position = models.CharField(max_length=3, choices=POSITION_CD, default='N01')
 
     class Meta:
-        verbose_name = "personnel"
-        verbose_name_plural = "personnel"
+        verbose_name = "Personnel"
+        verbose_name_plural = "Personnel"
 
     def __str__(self):
         return self.name_full_formatted

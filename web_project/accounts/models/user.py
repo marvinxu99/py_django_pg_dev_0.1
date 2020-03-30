@@ -10,11 +10,17 @@ class User(AbstractUser):
     last_name = None
 
     def get_full_name(self):
-        if self.is_staff:
-            p = Prsnl.objects.filter(user=self)[0]
-        else:
-            p = Person.objects.filter(user=self)[0]
-        return p.name_full_formatted
+        try:
+            if self.is_staff:
+                p = Prsnl.objects.filter(user=self)[0]
+            else:
+                p = Person.objects.filter(user=self)[0]
+            full_name = p.name_full_formatted
+        except:
+            full_name = " "
+        return full_name
     get_full_name.admin_order_field = 'name_last'
     get_full_name.short_description = 'full name'
+
+
 

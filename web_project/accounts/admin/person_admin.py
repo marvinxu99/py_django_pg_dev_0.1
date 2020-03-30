@@ -1,10 +1,9 @@
 from django.contrib import admin
 
 from ..models import Person, Person_Alias
+from ..models import User as CustomUser
 
 
-# Define an inline admin descriptor for Person model
-# which acts a bit like a singleton
 # class PersonInline(admin.TabularInline):   
 class PersonAliasInline(admin.StackedInline):   
     model = Person_Alias
@@ -22,11 +21,15 @@ class PersonAliasInline(admin.StackedInline):
 
 
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ('name_first', 'name_last', 'name_full_formatted', 'is_active')
-    list_filter = ('name_last', 'name_first')
+    list_display = ('name_first', 'name_middle', 'name_last', 'name_full_formatted', 'user', 'is_active')
+    list_filter = ('is_active', )
     fieldsets = (
         (None, {'fields': ('name_first', 'name_middle', 'name_last', 'name_full_formatted')}),
         (None, {'fields': ('is_active', 'active_status_cd')}),
+        (None, {
+            'fields': ('user',),
+            'description': 'Create or select a login username:'
+        }),
     )
     add_fieldsets = (
         (None, {'fields': ('name_first', 'name_middle', 'name_last', 'name_full_formatted')}),
@@ -34,7 +37,7 @@ class PersonAdmin(admin.ModelAdmin):
     )
     search_fields = ['name_last', 'name_first']
     ordering = ['name_last',]
-    inlines = [ PersonAliasInline, ]
+    inlines = [ PersonAliasInline]
 
 
 admin.site.register(Person, PersonAdmin)
