@@ -4,7 +4,9 @@ Run the following script in the Django shell:
 -> copy and paste the script
 '''
 
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from accounts.models import User
+
 from boards.models import Board, Topic, Post
 
 user = User.objects.first()

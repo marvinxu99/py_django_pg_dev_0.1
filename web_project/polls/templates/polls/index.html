@@ -6,22 +6,19 @@ Winter Winn
 {% endblock %}
 
 {% block content %}
-<h4>Select an app to run:</h4>
+<h5>Select an app to run:</h5>
 <ul>
-    <li><a href="boards/">Boards</a></li>
-</ul>
-<ul>
-    <li><a href="polls/">Polls</a></li>
-</ul>
-<ul>
-    <li><a href="admin/">Admin site</a></li>
+    <li class='mb-3 mt-3'><a href="boards/">Boards</a></li>
+    <li class='mb-3'><a href="polls/">Polls</a></li>
+    <li class='mb-3'><a href="catalog/">Local Library</a></li>
+    <li class='mb-3'><a href="admin/">Admin site</a></li>
 </ul>
 
-<h4>Sibling websites:</h4>
+<h5 class='mt-5'>Sibling websites:</h5>
 <div class="list-group">
-  <a href="winter_winnpy/" class="list-group-item list-group-item-action">&bull; Winter WinnPy (React + Node + Firebase + OAuth)</a>
-  <a href="winter_univer/" class="list-group-item list-group-item-action">&bull; Winter's Website (Python + Flask)</a>
-  <a href="face_recognition/" class="list-group-item list-group-item-action">&bull; Smart Face Recognition (React + Node + PostgreSQL)</a>
+  <a class="list-group-item list-group-item-action" href="winter_winnpy/">Winter WinnPy (React + Node + Firebase + OAuth)</a>
+  <a class="list-group-item list-group-item-action" href="winter_univer/">Winter's Website (Python + Flask)</a>
+  <a class="list-group-item list-group-item-action" href="face_recognition/">Smart Face Recognition (React + Node + PostgreSQL)</a>
 </div>
 {% endblock %}
 

@@ -19,19 +19,16 @@ class PrsnlAliasInline(admin.StackedInline):
 
 
 class PrsnlAdmin(admin.ModelAdmin):
-    list_display = ('name_first', 'name_last', 'name_full_formatted', 'user', 'position', 'is_active')
+    list_display = ('name_first', 'name_last', 'name_full_formatted', 'user', 'coloured_name', 'position', 'is_active')
     list_filter = ('is_active', )
     fieldsets = (
         (None, {'fields': ('name_first', 'name_middle', 'name_last', 'name_full_formatted')}),
+        (None, {'fields': ('colour_code', )}),
         (None, {'fields': ('position', 'is_active', 'active_status_cd')}),
         (None, {
             'fields': ('user',),
             'description': 'Create or select a login username:'
         }),
-    )
-    add_fieldsets = (
-        (None, {'fields': ('name_first', 'name_middle', 'name_last', 'name_full_formatted')}),
-        (None, {'fields': ('postion', 'is_active', 'active_status_cd')}),
     )
     search_fields = ['name_last', 'name_first']
     ordering = ['name_last',]

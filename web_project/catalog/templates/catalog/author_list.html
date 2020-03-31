@@ -1,0 +1,24 @@
+{% extends "catalog/base_gen_sidebar.html" %}
+
+{% block content %}
+  <h1>Author List</h1>
+  {% if author_list %}
+  <table class="table table-striped mb-4">
+    <tr>
+      <th>Name</th>
+      <th>Date of Birth</th>
+      <th>Date of Death</th>
+    </tr>
+    {% for author in author_list %}
+    <tr>
+      <td><a href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }}</a></td>
+      <td>{{ author.date_of_birth }}</td>        
+      <td>{{ author.date_of_death }}</td>        
+  </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+    <p>There are no auhtors in the library.</p>
+  {% endif %}       
+  {% include 'include/pagination.html' %}
+{% endblock %}

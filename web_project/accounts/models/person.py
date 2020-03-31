@@ -16,6 +16,7 @@ class Person(models.Model):
         on_delete=models.CASCADE,
         limit_choices_to={'is_staff': False},
         verbose_name='username',
+        help_text='Each person must have a username which is used to login to the system',
     )
    
     name_first = models.CharField("Fist Name", max_length=128, default='John')
@@ -71,5 +72,3 @@ class Person_Alias(models.Model):
 
     def __str__(self):
         return self.alias
-
-
