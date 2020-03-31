@@ -1,25 +1,33 @@
-{% extends 'base_no_breadcrumb.html' %}
+{% extends 'base.html' %}
 {% block title %}Local Library{% endblock %}
 {% load static %}
 {% block stylesheet %}
   <link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}">
 {% endblock %}
 {% block content %}
+  <!--
   <div class="container-fluid">
+  -->
+  <div>
     <div class="row">
       <div class="col-sm-2">
       {% block sidebar %}
-        <ul class="sidebar-nav">
+      <nav id="sidebar">
+        <div class="sidebar-header"><h3>Menu</h3></div>
+        <ul class="list-unstyled components">
           <li><a href="{% url 'catalog:index' %}">Home</a></li>
-          <li><a href="">All books</a></li>
-          <li><a href="">All authors</a></li>
+          <li><a href="{% url 'catalog:books' %}">All books</a></li>
+          <li><a href="{% url 'catalog:authors' %}">All authors</a></li>
+          <li><div class="border-top my-3"></div></li>
+          <li><a href="{% url 'catalog:contact' %}">Contact us</a></li>
+          <li><a href="{% url 'winter_univer' %}">About Winter</a></li>
         </ul>
+      </nav>
       {% endblock %}
       </div>
       <div class="col-sm-10 ">{% block libcontent %}{% endblock %}</div>
     </div>
   </div>
 {% endblock %}
-
 
 

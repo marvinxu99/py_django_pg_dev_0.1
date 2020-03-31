@@ -1,7 +1,10 @@
-{% extends "catalog/base_gen_sidebar.html" %}
-
-{% block content %}
-  <h1>Book List</h1>
+{% extends "catalog/base_catalog.html" %}
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'catalog:index' %}">Local Library</a></li>
+<li class="breadcrumb-item active">Books</li>
+{% endblock %}
+{% block libcontent %}
+  <h5>Book List</h5>
   {% if book_list %}
   <table class="table table-striped mb-4">
     <tr>

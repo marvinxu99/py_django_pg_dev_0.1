@@ -1,7 +1,10 @@
-{% extends "catalog/base_gen_sidebar.html" %}
-
-{% block content %}
-  <h1>{{ author.last_name }}, {{ author.first_name }}</h1>
+{% extends "catalog/base_catalog.html" %}
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'catalog:index' %}">Local Library</a></li>
+<li class="breadcrumb-item active">Author Details</li>
+{% endblock %}
+{% block libcontent %}
+  <h5>{{ author.last_name }}, {{ author.first_name }}</h5>
   <p>{{ author.date_of_birth }} - {% if author.date_of_death %} {{ author.date_of_death}} {% endif %} </p>
 
   <div class='card w-75 borderless'>
@@ -10,7 +13,7 @@
       <ul class="list-group list-group-flush">
         {% for book in author.book_set.all %}
         <li class="list-group-item border-1">
-          <a href="{% url 'catalog:book-detail' book.pk %}">{{ book.title }}</a><br>
+          <a href="{% url 'catalog:book-detail' book.pk %}"><strong>{{ book.title }}</strong></a><br>
           {{ book.summary }}          
         </li>
         {% endfor %}

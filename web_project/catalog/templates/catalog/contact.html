@@ -1,0 +1,20 @@
+{% extends "catalog/base_catalog.html" %}
+{% block title %}Contact us{% endblock %}
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'catalog:index' %}">Local Library</a></li>
+<li class="breadcrumb-item active">Contact Us</li>
+{% endblock %}
+{% block libcontent %}
+<h5>Send a message to Winter (the awsome webmaster):</h5>
+<form action="{% url 'catalog:contact' %}" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }} <br> 
+            {{ field }}
+        </div>
+    {% endfor %}
+    <input class='button mt-3' type="submit" value="Send Message">
+</form>
+{% endblock %}

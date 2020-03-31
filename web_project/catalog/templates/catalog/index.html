@@ -1,9 +1,13 @@
-{% extends "catalog/base_gen_sidebar.html" %}
+{% extends "catalog/base_catalog.html" %}
 
-{% block content %}
-  <h1>Local Library Home</h1>
+{% block breadcrumb %}
+<li class="breadcrumb-item  active">Local Library Home</li>
+{% endblock %}
+
+{% block libcontent %}
+  <h3>Local Library Home</h3>
   <p>Welcome to LocalLibrary, a website developed by <em>Winter Winn</em>!</p>
-  <h2>Dynamic content</h2>
+  <h4>About your library</h4>
   <p>The library has the following record counts:</p>
   <ul>
     <li><strong>Books:</strong> {{ num_books }}</li>
