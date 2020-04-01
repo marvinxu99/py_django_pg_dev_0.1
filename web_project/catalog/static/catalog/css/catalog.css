@@ -26,18 +26,18 @@ body {
 #sidebar {
   min-width: 150px;
   max-width: 150px;
-  min-height: 70vh;
+  min-height: 100vh;
   background: #7386D5;
   color: #fff;
   transition: all 0.3s;
 }
 #sidebar .sidebar-header {
-  padding: 20px;
+  padding: 10px;
   background: #6d7fcc;
 }
 
 #sidebar ul.components {
-  padding: 20px 0;
+  padding: 10px 0;
   border-bottom: 1px solid #47748b;
 }
 

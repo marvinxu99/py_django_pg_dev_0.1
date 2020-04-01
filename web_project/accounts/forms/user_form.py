@@ -1,17 +1,19 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from ..models import User
+from accounts.models import User as CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm):
-        model = User
+        model = CustomUser
         fields = ('username', 'email')
+        #exclude = ('first_name', 'last_name',)
 
 
 class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = ('username', 'email')
+        #exclude = ('first_name', 'last_name',)

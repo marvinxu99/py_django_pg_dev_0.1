@@ -1,0 +1,27 @@
+{% extends "catalog/base_catalog.html" %}
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'catalog:index' %}">Local Library</a></li>
+<li class="breadcrumb-item active">Borrowed Books</li>
+{% endblock %}
+{% block libcontent %}
+<div class='card w-75 borderless'>
+  {% if bookinstance_list %}
+  <div class='card-body'>
+    <h3 class="card-title">Borrowed Books</h3>
+    <ul class="list-group list-group-flush">
+      {% for bookinst in bookinstance_list %} 
+      <li class="list-group-item border-1 {% if bookinst.is_overdue %}text-danger{% endif %}">
+        <a href="{% url 'catalog:book-detail' bookinst.book.pk %}">{{bookinst.book.title}}</a> ({{ bookinst.due_back }})        
+      </li>
+      {% endfor %}
+    </ul>  
+  </div>
+  {% else %}
+  <p>There are no books borrowed.</p>
+  {% endif %} 
+  <div class='card-body'>
+    <h5 class="card-title">Overdue Fines</h5>
+    <p class='card-text'>You have no records of unpaid overdue fines</p>
+  </div>      
+</div>
+{% endblock %}

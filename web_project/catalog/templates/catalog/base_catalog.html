@@ -19,6 +19,14 @@
           <li><a href="{% url 'catalog:books' %}">All books</a></li>
           <li><a href="{% url 'catalog:authors' %}">All authors</a></li>
           <li><div class="border-top my-3"></div></li>
+          {% if user.is_authenticated %}
+            <li><span class='ml-1'>User: {{ user.get_username }}</span></li>
+            <li><a href="{% url 'catalog:my-borrowed' %}">My Borrowed</a></li>
+            <li><a href="{% url 'accounts:logout'%}?next={{request.path}}">Logout</a></li>   
+          {% else %}
+            <li><a href="{% url 'accounts:login'%}?next={{request.path}}">Login</a></li>   
+          {% endif %}         
+          <li><div class="border-top my-3"></div></li>
           <li><a href="{% url 'catalog:contact' %}">Contact us</a></li>
           <li><a href="{% url 'winter_univer' %}">About Winter</a></li>
         </ul>

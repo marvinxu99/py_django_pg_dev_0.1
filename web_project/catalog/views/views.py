@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views import generic
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 from catalog.models import Book, Author, BookInstance, Genre
 
@@ -20,13 +22,18 @@ def index(request):
     num_genres = Genre.objects.count()
     num_winter_books = Book.objects.filter(title__icontains='winter').count()
 
+   # Number of visits to this view, as counted in the session variable.
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
+   
     context = {
         'num_books': num_books,
         'num_instances': num_instances,
         'num_instances_available': num_instances_available,
         'num_authors': num_authors,
         'num_genres': num_genres,
-        'num_winter_books': num_winter_books
+        'num_winter_books': num_winter_books,
+        'num_visits': num_visits,
     }
 
     # Render the HTML template index.html with the data in the context variable
@@ -57,7 +64,7 @@ class BookListView(generic.ListView):
         return context
 
 
-class BookDetailView(generic.DetailView):
+class BookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Book
     context_object_name = 'book'
     template_name = 'catalog/book_details.html'
@@ -72,7 +79,17 @@ class AuthorListView(generic.ListView):
     def get_queryset(self):
         return Author.objects.all()
 
-
+@login_required
 def author_detail_view(request, pk):
     author = get_object_or_404(Author, pk=pk)    
     return render(request, 'catalog/author_details.html', { 'author': author })
+
+
+class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
+    """Generic class-based view listing books on loan to current user."""
+    model = BookInstance
+    template_name ='catalog/bookinstance_list_borrowed_user.html'
+    paginate_by = 10
+    
+    def get_queryset(self):
+        return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
