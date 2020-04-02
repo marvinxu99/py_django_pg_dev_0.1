@@ -4,19 +4,35 @@
 <li class="breadcrumb-item active">Authors</li>
 {% endblock %}
 {% block libcontent %}
+<div class="d-flex justify-content-between">
   <h5>Author List</h5>
+  {% if user.is_staff %}
+  <a href="{% url 'catalog:author-create' %}" class="btn btn-primary mb-3" role="button">Create Author</a>
+  {% endif %}
+</div>
   {% if author_list %}
   <table class="table table-striped mb-4">
     <tr>
       <th>Name</th>
       <th>Date of Birth</th>
       <th>Date of Death</th>
+      {% if user.is_staff %}
+      <th></th>
+      {% endif %}
     </tr>
     {% for author in author_list %}
     <tr>
       <td><a href="{{ author.get_absolute_url }}">{{ author.first_name }} {{ author.last_name }}</a></td>
-      <td>{{ author.date_of_birth }}</td>        
-      <td>{{ author.date_of_death }}</td>        
+      <td>{{ author.date_of_birth }}</td>             
+      <td>{% if author.date_of_death %}{{ author.date_of_death }} {% else %} - {% endif %}</td> 
+      <td class="text-right">
+        {% if user.is_staff and perms.catalog.change_author %}
+        <a href="{% url 'catalog:author-update' author.pk %}" class="btn-sm btn-secondary mb-1" role="button">Modify</a>
+        {% endif %}
+        {% if user.is_staff and perms.catalog.delete_author %}
+        <a href="{% url 'catalog:author-delete' author.pk %}" class="btn-sm btn-secondary mb-1" role="button">Delete</a>
+        {% endif %}
+      </td>       
   </tr>
     {% endfor %}
   </table>

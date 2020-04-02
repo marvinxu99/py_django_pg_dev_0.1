@@ -1,5 +1,7 @@
 {% extends "catalog/base_catalog.html" %}
 {% block title %}Contact us{% endblock %}
+{% load static %}
+
 {% block breadcrumb %}
 <li class="breadcrumb-item"><a href="{% url 'catalog:index' %}">Local Library</a></li>
 <li class="breadcrumb-item active">Contact Us</li>
@@ -21,4 +23,29 @@
     </form>
   </div>
 </div>
+<b>Start Date of Pass</b>:
+<input class="requiredField passdate" type="input" id="PassStartDt" size='10' />
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'catalog/js/jquery-ui.min.js' %}"></script>
+<script>
+$(function(){
+	$("#PassStartDt").datepicker({
+		changeYear: true,
+		changeMonth: true,
+		dateFormat: 'dd-M-yy',
+		onClose: function(dateTime){
+             //var id = this.id;
+             //alert(id);
+ 
+             if (dateTime != "") {
+             	$(this).removeClass("requiredField");
+             } else {
+             	$(this).addClass("requiredField");
+             }
+        }
+	});
+});
+</script>
 {% endblock %}

@@ -83,13 +83,3 @@ class AuthorListView(generic.ListView):
 def author_detail_view(request, pk):
     author = get_object_or_404(Author, pk=pk)    
     return render(request, 'catalog/author_details.html', { 'author': author })
-
-
-class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
-    """Generic class-based view listing books on loan to current user."""
-    model = BookInstance
-    template_name ='catalog/bookinstance_list_borrowed_user.html'
-    paginate_by = 10
-    
-    def get_queryset(self):
-        return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
