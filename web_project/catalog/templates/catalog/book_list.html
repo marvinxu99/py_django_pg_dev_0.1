@@ -6,19 +6,23 @@
 {% block libcontent %}
   <h5>Book List</h5>
   {% if book_list %}
-  <table class="table table-striped mb-4">
-    <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Genre</th>
-    </tr>
-    {% for book in book_list %}
-    <tr>
-        <td><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></td>
-        <td>{{ book.author }}</td>
-        <td>{{ book.display_genre }}</td>        
-    </tr>
-    {% endfor %}
+  <table class="gen-list-view table table-striped table-sm table-hover mb-4">
+    <thead>
+      <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Genre</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in book_list %}
+      <tr>
+          <td><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.display_genre }}</td>        
+      </tr>
+      {% endfor %}
+    </tbody>
   </table>
   {% else %}
     <p>There are no books in the library.</p>
