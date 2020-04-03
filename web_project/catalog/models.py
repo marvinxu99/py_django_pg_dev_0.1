@@ -3,6 +3,7 @@ from django.urls import reverse
 import uuid
 from django.conf import settings
 from datetime import date
+from django.utils.translation import gettext_lazy as _
 
 
 class Author(models.Model):
@@ -58,6 +59,10 @@ class Book(models.Model):
     genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
 
     language = models.ForeignKey(Language, on_delete=models.SET_NULL, null=True)
+
+    class Meta:
+        ordering = ['title']
+
     
     def __str__(self):
         """String for representing the Model object."""
@@ -84,23 +89,23 @@ class BookInstance(models.Model):
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
 
-    LOAN_STATUS = (
-        ('m', 'Maintenance'),
-        ('o', 'On loan'),
-        ('a', 'Available'),
-        ('r', 'Reserved'),
-    )
+    class LOAN_STATUS(models.TextChoices):
+        AVAILABLE = 'a', _('Available')
+        MAINTENANCE = 'm', _('Maintenance')
+        ON_LOAN = 'o', _('On loan')
+        RESERVED = 'r', _('Reserved')
+    
     status = models.CharField(
         max_length=1,
-        choices=LOAN_STATUS,
+        choices=LOAN_STATUS.choices,
         blank=True,
-        default='m',
+        default=LOAN_STATUS.MAINTENANCE,
         help_text='Book availability',
     )
     borrower = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
-        ordering = ['due_back']
+        ordering = ['status', 'due_back']
         permissions =(("can_mark_returned", "Set book as returned"),)
 
     def __str__(self):

@@ -13,7 +13,10 @@ urlpatterns = [
 
     path('books/', views.BookListView.as_view(), name='books'),
     path('book/<int:pk>', views.BookDetailView.as_view(), name='book-detail'),
-    path('book/<uuid:pk>/renew/', views.renew_book_staff, name='renew-book-staff'),
+    path('book/<uuid:pk>/renew-staff/', views.renew_book_staff, name='renew-book-staff'),
+    path('book/<uuid:pk>/renew-user/', views.renew_book_user, name='renew-book-user'),
+    path('book/<uuid:pk>/test-checkout/', views.test_checkout, name='test-checkout'),
+    path('book/<uuid:pk>/change-book-status-staff/', views.change_book_status_staff, name='change-book-status-staff'),
     
     path('contact/', views.contact_email, name='contact'),
     path('contact_email_sent/', views.contact_email_sent, name='contact_email_sent'),

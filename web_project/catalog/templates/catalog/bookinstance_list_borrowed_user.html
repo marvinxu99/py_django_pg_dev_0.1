@@ -8,20 +8,34 @@
   {% if bookinstance_list %}
   <div class='card-body'>
     <h3 class="card-title">Borrowed Books</h3>
-    <ul class="list-group list-group-flush">
-      {% for bookinst in bookinstance_list %} 
-      <li class="list-group-item border-1 {% if bookinst.is_overdue %}text-danger{% endif %}">
-        <a href="{% url 'catalog:book-detail' bookinst.book.pk %}">{{bookinst.book.title}}</a> ({{ bookinst.due_back }})        
-      </li>
+    <table class="table table-striped mb-4">
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Due Back</th>
+        <th></th>
+      </tr>
+      {% for bookinst in bookinstance_list %}
+      <tr>
+        <td>
+          <a href="{% url 'catalog:book-detail' bookinst.book.pk %}"><strong>{{bookinst.book.title}}</strong></a>
+        </td>
+        <td>
+          {{ bookinst.book.author }}
+        </td>
+        <td> 
+          <span class="{% if bookinst.is_overdue %}text-danger{% endif %}">{{ bookinst.due_back }}</span>
+        </td>
+        <td>
+          <a class="btn btn-secondary btn-sm" href="{% url 'catalog:renew-book-user' bookinst.id %}">Renew</a>
+        </td>
+      </tr>
       {% endfor %}
-    </ul>  
+    </table>  
   </div>
   {% else %}
   <p>There are no books borrowed.</p>
   {% endif %} 
-  <div class='card-body'>
-    <h5 class="card-title">Overdue Fines</h5>
-    <p class='card-text'>You have no records of unpaid overdue fines</p>
-  </div>      
+  {% include 'include/pagination.html' %}
 </div>
 {% endblock %}

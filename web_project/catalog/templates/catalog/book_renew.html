@@ -5,8 +5,10 @@
 {% endblock %}
 {% block libcontent %}
   <h1>{{ book_instance.book.title }}</h1>
-  <p>Borrower: {{ book_instance.borrower }}</p>
-  <p{% if book_instance.is_overdue %} class="text-danger"{% endif %}>Due date: {{ book_instance.due_back }}</p>   
+  {% if user.is_staff %}
+    <p>Borrower: {{ book_instance.borrower }}</p>
+  {% endif %}
+  <p {% if book_instance.is_overdue %} class="text-danger"{% endif %}>Due date: {{ book_instance.due_back }}</p>   
   <form action="" method="post">
     {% csrf_token %}
     <table>
